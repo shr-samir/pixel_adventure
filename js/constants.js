@@ -5,7 +5,7 @@ canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
 
-const gravity = 0.8
+let gravity = 0.8
 
 const keys = {
   right: {

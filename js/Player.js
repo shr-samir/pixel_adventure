@@ -50,11 +50,14 @@ class Player {
     if (!this.isGrounded) {
       this.frameX = 0
       this.playerSprite.src =
-      '../assets/pixel_adventure_1/main_characters/virtual_guy/jump.png'
-      console.log('check')
+        '../assets/pixel_adventure_1/main_characters/virtual_guy/jump.png'
     } else {
       this.playerSprite.src =
-      '../assets/pixel_adventure_1/main_characters/virtual_guy/idle-right.png'
+        '../assets/pixel_adventure_1/main_characters/virtual_guy/idle-right.png'
+      let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 10
+      this.frameX = this.playerSpriteWidth * positionInSprite
+      this.draw()
+      this.gameFrame++
     }
     this.position.x += this.velocity.x
     this.position.y += this.velocity.y
@@ -74,6 +77,7 @@ class Player {
     let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 10
     this.frameX = this.playerSpriteWidth * positionInSprite
     this.draw()
+    this.velocity.x = 5
     this.gameFrame++
   }
 
@@ -81,10 +85,10 @@ class Player {
   moveLeft() {
     this.playerSprite.src =
       '../assets/pixel_adventure_1/main_characters/virtual_guy/run-left.png'
-      let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 10
-      this.frameX = this.playerSpriteWidth * positionInSprite
-      this.draw()
-      this.gameFrame++
+    let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 10
+    this.frameX = this.playerSpriteWidth * positionInSprite
+    this.draw()
+    this.gameFrame++
   }
 
   // to jump
@@ -92,8 +96,17 @@ class Player {
     if (player.isGrounded) {
       player.velocity.y -= 20
       player.isGrounded = false
-      
+
       player.update()
+    }
+  }
+
+  slideLeft() {
+    if (!this.isGrounded) {
+      this.playerSprite.src =
+        '../assets/pixel_adventure_1/main_characters/virtual_guy/slide-right.png'
+      let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 5
+      this.frameX = this.playerSpriteWidth * positionInSprite
     }
   }
 }

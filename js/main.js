@@ -1,7 +1,16 @@
+const mapImage = new Image()
+mapImage.src = '../assets/map1.png'
+console.log(mapImage)
+
+mapImage.onload = () => {
+  ctx.drawImage(mapImage, 0, 0)
+}
+
 const player = new Player()
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.drawImage(mapImage, 0, 0)
   requestAnimationFrame(animate)
 
   // Draw the wall

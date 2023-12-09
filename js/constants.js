@@ -16,8 +16,8 @@ const keys = {
   },
   jump: {
     pressed: false,
-    double: false
-  }
+    double: false,
+  },
 }
 
 // to delay frames

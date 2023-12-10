@@ -2,8 +2,8 @@
 class Player {
   constructor() {
     this.playerSprite = new Image()
-    this.playerSprite.src =
-      '../assets/pixel_adventure_1/main_characters/virtual_guy/idle-right.png'
+    // this.playerSprite.src 
+    // = '../assets/pixel_adventure_1/main_characters/virtual_guy/idle-right.png'
     this.playerSpriteWidth = 32
     this.playerSpriteHeight = 32
     this.frameX = 0

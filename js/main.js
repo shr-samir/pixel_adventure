@@ -1,6 +1,5 @@
 const mapImage = new Image()
 mapImage.src = '../assets/map1.png'
-console.log(mapImage)
 
 mapImage.onload = () => {
   ctx.drawImage(mapImage, 0, 0)
@@ -9,13 +8,27 @@ mapImage.onload = () => {
 const player = new Player()
 
 function animate() {
+  requestAnimationFrame(animate)
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   ctx.drawImage(mapImage, 0, 0)
-  requestAnimationFrame(animate)
 
   // Draw the wall
-  ctx.fillStyle = 'green'
-  ctx.fillRect(wall.position.x, wall.position.y, wall.width, wall.height)
+  // ctx.fillStyle = 'green'
+  // ctx.fillRect(wall.position.x, wall.position.y, wall.width, wall.height)
+
+  boundaries.forEach((boundary) => {
+    boundary.draw()
+
+    if (
+      boundaryCollision({
+        rect1: player,
+        rect2: boundary,
+      })
+    ) {
+      console.log('collision')
+      player.position.y = boundary.position.y - player.height
+    }
+  })
 
   player.update()
 
@@ -28,10 +41,10 @@ function animate() {
   } else {
     player.velocity.x = 0
   }
-  if (onCollision(player, wall)) {
-    onSlide()
-    console.log('collison')
-  }
+  // if (onCollision(player, wall)) {
+  //   onSlide()
+  //   console.log('collison')
+  // }
 }
 
 animate()

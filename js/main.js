@@ -16,19 +16,55 @@ function animate() {
   // ctx.fillStyle = 'green'
   // ctx.fillRect(wall.position.x, wall.position.y, wall.width, wall.height)
 
-  boundaries.forEach((boundary) => {
-    boundary.draw()
+  // bottom Boundary collision with player
+  boundariesBottom.forEach((boundaryBottom) => {
+    boundaryBottom.draw()
 
     if (
-      boundaryCollision({
+      boundaryCollisionBottom({
         rect1: player,
-        rect2: boundary,
+        rect2: boundaryBottom,
       })
     ) {
-      console.log('collision')
-      player.position.y = boundary.position.y - player.height
+      console.log('collision Bottom')
+      player.position.y = boundaryBottom.position.y - player.height
+      player.velocity.y = 0
+      player.isGrounded = true
     }
   })
+
+  // top Boundary collision with player
+  boundariesTop.forEach((boundaryTop) => {
+    boundaryTop.draw()
+
+    if (boundaryCollisionTop ({
+        rect1: player,
+        rect2: boundaryTop,
+      })
+    ) {
+      console.log('collision Top')
+      player.position.y = boundaryTop.position.y + MapBoundary.height
+
+      // player.position.y = wall.position.y
+      player.velocity.y = 0
+      
+    }
+  })
+
+  // // left Boundary collision with player
+  // boundariesLeft.forEach((boundaryLeft) => {
+  //   boundaryLeft.draw()
+
+  //   if (
+  //     boundaryCollisionLeft({
+  //       rect1: player,
+  //       rect2: boundaryLeft,
+  //     })
+  //   ) {
+  //     player.position.x = 0
+  //     console.log('collision Left')
+  //   }
+  // })
 
   player.update()
 
@@ -41,6 +77,8 @@ function animate() {
   } else {
     player.velocity.x = 0
   }
+
+
   // if (onCollision(player, wall)) {
   //   onSlide()
   //   console.log('collison')

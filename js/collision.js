@@ -23,12 +23,13 @@ class MapBoundary {
   }
 }
 
-const boundaries = []
+// bottom boundary definition
+const boundariesBottom = []
 
 boundaryArray.forEach((row, i) => {
   row.forEach((symbol, j) => {
     if (symbol === 260) {
-      boundaries.push(
+      boundariesBottom.push(
         new MapBoundary({
           position: {
             x: j * MapBoundary.width,
@@ -39,9 +40,8 @@ boundaryArray.forEach((row, i) => {
     }
   })
 })
-// console.log(boundaries)
 
-function boundaryCollision({rect1, rect2}) {
+function boundaryCollisionBottom({ rect1, rect2 }) {
   // console.log(rect1.position.x);
   // console.log(rect2.position.x);
   return (
@@ -51,6 +51,67 @@ function boundaryCollision({rect1, rect2}) {
     rect1.position.y + rect1.height >= rect2.position.y
   )
 }
+
+// top boundary definition
+const boundariesTop = []
+
+boundaryArray.forEach((row, i) => {
+  row.forEach((symbol, j) => {
+    if (symbol === 261) {
+      boundariesTop.push(
+        new MapBoundary({
+          position: {
+            x: j * MapBoundary.width,
+            y: i * MapBoundary.height,
+          },
+        })
+      )
+    }
+  })
+})
+
+function boundaryCollisionTop({ rect1, rect2 }) {
+  // console.log(rect1.position.x);
+  // console.log(rect2.position.x);
+  return (
+    // rect1.position.y == rect2.position.y + MapBoundary.height &&
+    rect1.position.y <= rect2.position.y + MapBoundary.height &&
+    // rect1.position.y + rect1.height >= rect2.position.y &&
+    rect1.position.x + rect1.width > rect2.position.x &&
+    rect1.position.x < rect2.position.x + rect2.width 
+    && rect1.position.y - rect1.velocity.y >= rect2.position.y + MapBoundary.height
+  )
+}
+
+// // left boundary definition
+// const boundariesLeft = []
+
+// boundaryArray.forEach((row, i) => {
+//   row.forEach((symbol, j) => {
+//     if (symbol === 263) {
+//       boundariesLeft.push(
+//         new MapBoundary({
+//           position: {
+//             x: j * MapBoundary.width,
+//             y: i * MapBoundary.height,
+//           },
+//         })
+//       )
+//     }
+//   })
+// })
+
+// function boundaryCollisionLeft({ rect1, rect2 }) {
+//   // console.log(rect1.position.x);
+//   // console.log(rect2.position.x);
+//   // console.log(rect1.position.x + rect1.width <= rect2.position.x)
+//   return (
+//     rect1.position.x + rect1.width === rect2.position.x
+//     // &&
+//     // rect1.position.y <= rect2.position.y &&
+//     // rect1.position.y + rect1.height <= rect2.position.y + 16
+//   )
+// }
 
 //////////////
 function onCollision(player, obj) {

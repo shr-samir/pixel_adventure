@@ -37,34 +37,51 @@ function animate() {
   boundariesTop.forEach((boundaryTop) => {
     boundaryTop.draw()
 
-    if (boundaryCollisionTop ({
+    if (
+      boundaryCollisionTop({
         rect1: player,
         rect2: boundaryTop,
       })
     ) {
       console.log('collision Top')
       player.position.y = boundaryTop.position.y + MapBoundary.height
-
-      // player.position.y = wall.position.y
       player.velocity.y = 0
-      
     }
   })
 
-  // // left Boundary collision with player
-  // boundariesLeft.forEach((boundaryLeft) => {
-  //   boundaryLeft.draw()
+  // left Boundary collision with player
+  boundariesLeft.forEach((boundaryLeft) => {
+    boundaryLeft.draw()
 
-  //   if (
-  //     boundaryCollisionLeft({
-  //       rect1: player,
-  //       rect2: boundaryLeft,
-  //     })
-  //   ) {
-  //     player.position.x = 0
-  //     console.log('collision Left')
-  //   }
-  // })
+    if (
+      boundaryCollisionLeft({
+        rect1: player,
+        rect2: boundaryLeft,
+      })
+    ) {
+      if (keys.left.pressed) {
+        player.velocity.x = 0
+        console.log('collision Left')
+      }
+    }
+  })
+
+  // right Boundary collision with player
+  boundariesRight.forEach((boundaryRight) => {
+    boundaryRight.draw()
+
+    if (
+      boundaryCollisionRight({
+        rect1: player,
+        rect2: boundaryRight,
+      })
+    ) {
+      if (keys.right.pressed) {
+        player.velocity.x = 0
+        console.log('collision Right')
+      }
+    }
+  })
 
   player.update()
 
@@ -77,7 +94,6 @@ function animate() {
   } else {
     player.velocity.x = 0
   }
-
 
   // if (onCollision(player, wall)) {
   //   onSlide()

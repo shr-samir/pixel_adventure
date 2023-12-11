@@ -26,7 +26,7 @@ function animate() {
         rect2: boundaryBottom,
       })
     ) {
-      console.log('collision Bottom')
+      // console.log('collision Bottom')
       player.position.y = boundaryBottom.position.y - player.height
       player.velocity.y = 0
       player.isGrounded = true
@@ -43,7 +43,7 @@ function animate() {
         rect2: boundaryTop,
       })
     ) {
-      console.log('collision Top')
+      // console.log('collision Top')
       player.position.y = boundaryTop.position.y + MapBoundary.height
       player.velocity.y = 0
     }
@@ -57,11 +57,11 @@ function animate() {
       boundaryCollisionLeft({
         rect1: player,
         rect2: boundaryLeft,
-      })
+      }) 
     ) {
       if (keys.left.pressed) {
         player.velocity.x = 0
-        console.log('collision Left')
+        // console.log('collision Left')
       }
     }
   })
@@ -76,10 +76,10 @@ function animate() {
         rect2: boundaryRight,
       })
     ) {
-      player.slideLeft()
+      // player.slideLeft()
       if (keys.right.pressed) {
         player.velocity.x = 0
-        console.log('collision Right')
+        // console.log('collision Right')
 
       }
     }
@@ -90,8 +90,10 @@ function animate() {
   // for left right movement
   if (keys.right.pressed) {
     player.moveRight()
+    player.lastKey = 'right'
   } else if (keys.left.pressed) {
     player.moveLeft()
+    player.lastKey = 'left'
     player.velocity.x = -5
   } else {
     player.velocity.x = 0

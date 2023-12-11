@@ -21,12 +21,12 @@ class Player {
     this.width = 64
     this.height = 64
     this.isGrounded = true
+    this.lastKey = 'right'
     // this.jumpCounter = 0
   }
 
   // draw a player
   draw() {
-    //     const staggerFrames = 3
     // let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 10
     // this.frameX = this.playerSpriteWidth * positionInSprite
 
@@ -49,9 +49,20 @@ class Player {
     this.draw()
     if (!this.isGrounded) {
       this.frameX = 0
+      if (this.lastKey === 'right')
+        this.playerSprite.src =
+          '../assets/pixel_adventure_1/main_characters/virtual_guy/jump-right.png'
+      else if (this.lastKey === 'left')
+        this.playerSprite.src =
+          '../assets/pixel_adventure_1/main_characters/virtual_guy/jump-left.png'
+    } else if (this.lastKey === 'left' && !keys.left.pressed) {
       this.playerSprite.src =
-        '../assets/pixel_adventure_1/main_characters/virtual_guy/jump.png'
-    } else {
+        '../assets/pixel_adventure_1/main_characters/virtual_guy/idle-left.png'
+      let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 10
+      this.frameX = this.playerSpriteWidth * positionInSprite
+      this.draw()
+      this.gameFrame++
+    } else if (this.lastKey === 'right' && !keys.right.pressed) {
       this.playerSprite.src =
         '../assets/pixel_adventure_1/main_characters/virtual_guy/idle-right.png'
       let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 10
@@ -59,6 +70,7 @@ class Player {
       this.draw()
       this.gameFrame++
     }
+
     this.position.x += this.velocity.x
     this.position.y += this.velocity.y
 
@@ -102,15 +114,15 @@ class Player {
   }
 
   slideLeft() {
-    if (!this.isGrounded) {
+    // if (!this.isGrounded) {
       this.playerSprite.src =
         '../assets/pixel_adventure_1/main_characters/virtual_guy/slide-right.png'
-      let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 5 
+      let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 5
       this.frameX = this.playerSpriteWidth * positionInSprite
       this.draw()
       this.gameFrame++
       console.log('slideLeft')
       console.log(this.playerSprite)
-    }
+    // }
   }
 }

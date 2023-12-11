@@ -2,7 +2,7 @@
 class Player {
   constructor() {
     this.playerSprite = new Image()
-    // this.playerSprite.src 
+    // this.playerSprite.src
     // = '../assets/pixel_adventure_1/main_characters/virtual_guy/idle-right.png'
     this.playerSpriteWidth = 32
     this.playerSpriteHeight = 32
@@ -105,8 +105,12 @@ class Player {
     if (!this.isGrounded) {
       this.playerSprite.src =
         '../assets/pixel_adventure_1/main_characters/virtual_guy/slide-right.png'
-      let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 5
+      let positionInSprite = Math.floor(this.gameFrame / staggerFrames) % 5 
       this.frameX = this.playerSpriteWidth * positionInSprite
+      this.draw()
+      this.gameFrame++
+      console.log('slideLeft')
+      console.log(this.playerSprite)
     }
   }
 }

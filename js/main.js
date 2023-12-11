@@ -76,9 +76,11 @@ function animate() {
         rect2: boundaryRight,
       })
     ) {
+      player.slideLeft()
       if (keys.right.pressed) {
         player.velocity.x = 0
         console.log('collision Right')
+
       }
     }
   })
